@@ -1,0 +1,822 @@
+```html
+<html lang="zh-CN"><head>
+  <meta charset="UTF-8">
+<style>
+html {
+  width: 100%;
+  height: fit-content;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+  min-height: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+summary {
+  color: white;
+}
+</style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.relative{position:relative}.top-\[7px\]{top:7px}.z-10{z-index:10}.mx-auto{margin-left:auto;margin-right:auto}.-mt-1{margin-top:-0.25rem}.mb-0{margin-bottom:0px}.mb-\[10px\]{margin-bottom:10px}.mb-\[25px\]{margin-bottom:25px}.mb-\[4px\]{margin-bottom:4px}.mb-\[5px\]{margin-bottom:5px}.mt-\[10px\]{margin-top:10px}.flex{display:flex}.h-\[105px\]{height:105px}.h-full{height:100%}.w-\[85px\]{width:85px}.w-full{width:100%}.max-w-\[600px\]{max-width:600px}.flex-shrink-0{flex-shrink:0}.flex-grow{flex-grow:1}.flex-row-reverse{flex-direction:row-reverse}.flex-col{flex-direction:column}.items-center{align-items:center}.justify-center{justify-content:center}.gap-\[15px\]{gap:15px}.gap-\[25px\]{gap:25px}.overflow-hidden{overflow:hidden}.rounded-\[2px\]{border-radius:2px}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-l-2{border-left-width:2px}.border-r-2{border-right-width:2px}.border-white\/10{border-color:rgb(255 255 255 / 0.1)}.border-white\/30{border-color:rgb(255 255 255 / 0.3)}.border-white\/60{border-color:rgb(255 255 255 / 0.6)}.bg-transparent{background-color:transparent}.bg-white\/10{background-color:rgb(255 255 255 / 0.1)}.object-cover{object-fit:cover}.object-top{object-position:top}.p-\[10px\]{padding:10px}.py-\[10px\]{padding-top:10px;padding-bottom:10px}.pb-\[10px\]{padding-bottom:10px}.pl-\[8px\]{padding-left:8px}.pr-\[8px\]{padding-right:8px}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.font-sans{font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}.font-serif{font-family:ui-serif, Georgia, Cambria, "Times New Roman", Times, serif}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[14px\]{font-size:14px}.text-\[16px\]{font-size:16px}.font-bold{font-weight:700}.italic{font-style:italic}.leading-\[0\.5\]{line-height:0.5}.leading-\[1\.4\]{line-height:1.4}.tracking-\[1px\]{letter-spacing:1px}.tracking-\[2px\]{letter-spacing:2px}.text-\[rgba\(220\2c 210\2c 190\2c 0\.7\)\]{color:rgba(220,210,190,0.7)}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-white\/40{color:rgb(255 255 255 / 0.4)}.opacity-\[0\.15\]{opacity:0.15}.opacity-\[0\.8\]{opacity:0.8}</style></head>
+<body>
+  
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Substitute</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100px;
+        }
+
+        .memory-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            min-height: 480px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            overflow: hidden;
+            padding: 40px 15px 20px;
+            box-sizing: border-box;
+        }
+
+        /* 巨大的英文水印 */
+        .bg-watermark {
+            font-family: 'Pinyon Script', cursive;
+            position: absolute;
+            top: 8%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 110px; 
+            color: rgba(120, 120, 120, 0.2); 
+            white-space: nowrap;
+            pointer-events: none; 
+            z-index: 0;
+            user-select: none;
+        }
+
+        /* 凌乱的红线层 */
+        .scars-layer {
+            position: absolute;
+            top: -18%;
+            left: 0;
+            width: 100%;
+            height: 138%;
+            pointer-events: none;
+            z-index: 0; /* 与水印同级 */
+            opacity: 0.8;
+        }
+
+        /* 顶部对话区域 */
+        .dialogue-section {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 8px; 
+        }
+
+        /* 上方对话文字 */
+        .dialogue-text {
+            font-size: 17px; 
+            color: rgba(220, 210, 190, 0.8); 
+            font-weight: 400;
+            letter-spacing: 0;
+            opacity: 0; 
+            transform: translateY(20px); 
+            font-family: "Songti SC", "SimSun", serif; 
+            text-shadow: 0 0 4px rgba(220,210,190,0.6), 0 0 8px rgba(220,210,190,0.4); 
+            text-align: center;
+        }
+
+        /* 中间：序章标记 */
+        .chapter-mark {
+            font-size: 12px; 
+            color: rgba(200, 200, 200, 0.7);
+            font-family: "Songti SC", "SimSun", serif;
+            letter-spacing: 4px; 
+            opacity: 0;
+            transform: translateY(10px);
+            margin-top: 16px;
+            margin-bottom: 16px; 
+            position: relative; 
+            z-index: 1;
+            text-shadow: 0 0 4px rgba(220,210,190,0.6), 0 0 8px rgba(220,210,190,0.4); 
+        }
+
+        /* 底部真相区域 */
+        .truth-section {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 6px; 
+        }
+
+        /* 下方真相文字 */
+        .truth-text {
+            font-size: 13px; 
+            color: rgba(220, 210, 190, 0.8); 
+            font-family: "Songti SC", "SimSun", serif;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(15px);
+            text-align: center;
+            line-height: 1.6;
+            text-shadow: 0 0 4px rgba(220,210,190,0.6), 0 0 8px rgba(220,210,190,0.4); 
+        }
+
+        /* 动画定义 */
+        @keyframes textFloatUp {
+            0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes fadeReveal {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-reveal {
+            animation: textFloatUp 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        
+        .animate-mark {
+            animation: fadeReveal 2s ease-out forwards;
+        }
+        
+        .animate-truth {
+            animation: textFloatUp 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* 英文角色信息面板样式 */
+        #ui-final-english {
+            --bg-glass-ultra: rgba(12, 21, 25, 0.1); 
+            --text-primary: #e0e0e0;
+            --text-dim: rgba(255, 255, 255, 0.45);
+            --accent-gold: #c7b299;
+            
+            font-family: 'Noto Serif SC', serif;
+            width: 100%;
+            max-width: 90vw;
+            height: 320px;
+            margin: 20px auto;
+            padding: 0 5px;
+            box-sizing: border-box;
+            
+            position: relative;
+            font-size: 12px;
+        }
+
+        /* --- 顶部导航区 --- */
+        .nav-final {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px 0;
+            margin-top: -40px;
+            margin-bottom: 5px;
+            z-index: 2;
+        }
+
+        .nav-final-link {
+            cursor: pointer;
+            text-align: center;
+            padding: 8px 15px;
+            color: var(--text-dim);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .nav-final-text {
+            font-size: clamp(9px, 2vw, 11px);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 300;
+            font-family: 'Cinzel', 'Noto Serif SC', serif;
+        }
+
+        .active-dot-final {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 1px;
+            background-color: var(--accent-gold);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        /* 交互状态 */
+        .nav-final-link:hover { color: rgba(255,255,255,0.8); }
+        .nav-final-link.active { color: var(--text-primary); }
+        .nav-final-link.active .nav-final-text {
+            text-shadow: 0 0 10px rgba(255,255,255,0.2);
+            font-weight: 500;
+        }
+        .nav-final-link.active .active-dot-final {
+            opacity: 0;
+        }
+
+        /* --- 内容组件 --- */
+        .content-final-box {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 单个内容页 */
+        .tab-final-content {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            padding: clamp(15px, 4vw, 25px) clamp(10px, 4vw, 20px);
+            box-sizing: border-box;
+            
+            opacity: 0;
+            transform: translateX(8px);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            pointer-events: none;
+            
+            overflow-y: auto;
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        .tab-final-content::-webkit-scrollbar { display: none; }
+        .tab-final-content.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        /* 排版细节 */
+        .content-label-final {
+            font-size: 10px;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            opacity: 0.7;
+            width: 100%;
+            padding-right: 10px;
+            box-sizing: border-box;
+        }
+
+        .main-text-final {
+            font-size: clamp(11px, 2.5vw, 12px);
+            line-height: 1.7;
+            color: rgba(235, 235, 235, 0.8);
+            text-align: justify;
+            user-select: text;
+        }
+
+        .main-text-final p {
+            margin-bottom: 12px;
+        }
+
+        .highlight-final {
+            color: var(--accent-gold);
+            font-weight: 500;
+        }
+
+        /* 角色特质样式 */
+        .character-traits-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .character-trait {
+            display: inline-block;
+        }
+
+        .trait-text {
+            font-size: clamp(10px, 2vw, 11px);
+            color: rgba(220, 210, 190, 0.7);
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        /* 淡金色样式 */
+        .light-gold {
+            color: rgba(220, 210, 190, 0.7) !important;
+        }
+
+        /* 标题横线样式 */
+        .title-line {
+            display: inline-block;
+            height: 1px;
+            background: rgba(220, 210, 190, 0.7);
+            margin-left: 15px;
+            flex-grow: 1;
+            vertical-align: middle;
+        }
+
+        /* 角色信息样式 */
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .info-label {
+            font-weight: 500;
+            color: rgba(220, 210, 190, 0.7);
+            min-width: 80px;
+            margin-right: 15px;
+            font-size: 11px;
+        }
+
+        .info-value {
+            color: rgba(235, 235, 235, 0.85);
+            flex-grow: 1;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* 玻璃效果工具类 */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+
+
+
+<div class="memory-container">
+    <!-- 底层水印 -->
+    <div class="bg-watermark">Substitute</div>
+    
+    <!-- 底层红线 SVG：改为横向穿越 -->
+    <svg class="scars-layer" viewBox="0 0 500 480" preserveAspectRatio="none">
+        <!-- 主线条：横向贯穿，带有波动和扭曲 -->
+        <path d="M 60 90 C 100 95, 120 85, 160 90 S 240 95, 280 85 S 340 82, 380 90 S 420 85, 440 90" stroke="rgba(160, 20, 20, 0.5)" stroke-width="1" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+          
+        <!-- 缠绕线条：增加纠缠感 -->
+        <path d="M 65 92 C 90 88, 130 96, 155 88 S 230 82, 275 95 S 330 98, 375 88 S 410 95, 435 92" stroke="rgba(200, 0, 0, 0.25)" stroke-width="0.6" fill="none" stroke-dasharray="10, 5"></path>
+    </svg>
+
+    <!-- 顶部对话 -->
+    <div class="dialogue-section">
+        <div class="dialogue-text animate-reveal" id="line1">「是你先说的喜欢我」</div>
+        <div class="dialogue-text animate-reveal" id="line2">「你想要的我都给了，还要怎么样」</div>
+    </div>
+    
+    <!-- 中间序章 -->
+    <div class="chapter-mark animate-mark" id="chapterMark">— 序 —</div>
+
+    <!-- 底部真相 -->
+    <div class="truth-section">
+        <div class="truth-text animate-truth" id="truth1">长相好，身材好，家世更是万里挑一</div>
+        <div class="truth-text animate-truth" id="truth2">唯独没几分真心</div>
+        <div class="truth-text animate-truth" id="truth3" style="margin-top: 4px;">所有人都知道你和他的青梅长得像</div>
+        <div class="truth-text animate-truth" id="truth4">唯独你不知道</div>
+    </div>
+
+    <!-- 破碎记忆回廊 - 幽灵刻印版（60%透明度 + 终句残留） -->
+    <div class="character-img" style="
+        position: relative;
+        width: 100%;
+        max-width: 450px;
+        height: 200px; 
+        margin: 20px auto;
+
+        background-image: url('https://pic1.imgdb.cn/item/6966d8ed0e6bc0c5db98dcb4.gif');
+        background-size: cover;
+        background-position: center 31%;
+        border-radius: 6px;
+        overflow: hidden;
+        font-family: 'SimSun', 'Songti SC', serif;
+        cursor: pointer;
+    ">
+    </div>
+
+    <!-- 英文角色信息面板 -->
+    <div id="ui-final-english">
+        <!-- 结构层 -->
+        <div class="nav-final">
+            <!-- 标签 1: 关于他 -->
+            <div class="nav-final-link active" onclick="finalSwitch(0)">
+                <span class="nav-final-text">HIM</span>
+                <div class="active-dot-final"></div>
+            </div>
+            <!-- 标签 2: 侧写 -->
+            <div class="nav-final-link" onclick="finalSwitch(1)">
+                <span class="nav-final-text">PROFILE</span>
+                <div class="active-dot-final"></div>
+            </div>
+            <!-- 标签 3: 过去 -->
+            <div class="nav-final-link" onclick="finalSwitch(2)">
+                <span class="nav-final-text">PAST</span>
+                <div class="active-dot-final"></div>
+            </div>
+            <!-- 标签 4: Bonds -->
+            <div class="nav-final-link" onclick="finalSwitch(3)">
+                <span class="nav-final-text">FAMILY</span>
+                <div class="active-dot-final"></div>
+            </div>
+        </div>
+
+        <div class="content-final-box glass-effect">
+            
+            <!-- 内容 1: About -->
+            <div class="tab-final-content active">
+                <span class="content-label-final light-gold">// HIM<span class="title-line"></span></span>
+                <div class="main-text-final">
+                  <div class="character-traits-container">
+                    <div class="character-trait">
+                      <span class="trait-text"># 知名模特</span>
+                    </div>
+                    <div class="character-trait">
+                      <span class="trait-text"># 百万网红</span>
+                    </div>
+                    <div class="character-trait">
+                      <span class="trait-text"># 京圈太子爷</span>
+                    </div>
+                  </div>
+                  
+                  <div class="character-info">
+                    <div class="info-row">
+                      <span class="info-label">Name</span>
+                      <span class="info-value">闵熙彻</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="info-label">Age</span>
+                      <span class="info-value">20岁</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="info-label">Birthday</span>
+                      <span class="info-value">11.18</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="info-label">Gender</span>
+                      <span class="info-value">男</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="info-label">Height</span>
+                      <span class="info-value">192CM</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="info-label">Identity</span>
+                      <span class="info-value">闵家独子，京大戏剧学院模特系大二</span>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <!-- 内容 2: Profile -->
+            <div class="tab-final-content">
+                <span class="content-label-final light-gold">// PROFILE<span class="title-line"></span></span>
+                <div class="main-text-final">
+                  <p>又野又欲的青年，天生引人注目。浅金色的头发随意凌乱，褐色眼睛笑起来微弯如月牙，深情无辜，可一旦冷下来，"不好惹"便完全写在脸上。</p>
+                  <p style="border-left: 1px solid rgba(220, 210, 190, 0.5); padding-left: 15px; margin: 15px 0;">
+                    <span style="font-style: italic; font-weight: bold;">张扬乖张、痞气十足，情绪写在脸上。高兴时爱闹爱黏人，不爽时直接冷处理、说话刻薄。对规则和权威没耐心，做事随性越界，不太在意后果。对他人的受伤缺乏真实负罪感，只会觉得麻烦。</span>
+                  </p>
+                  <p style="margin-top: 20px;">作息不规律，习惯性熬夜，手机从不离身，顺着毛很好哄，一旦惹毛了会当场翻脸。</p><p>
+                  </p><p>讨厌别人用过的东西，更是极其厌恶他人说教，反复委屈的人会令他敬而远之。</p>
+                </div>
+            </div>
+
+            <!-- 内容 3: Past -->
+            <div class="tab-final-content">
+                <span class="content-label-final light-gold">// PAST<span class="title-line"></span></span>
+                <div class="main-text-final">
+                  <p>父亲缺席、母亲溺爱，让他从小习惯"闯祸—兜底"的模式。小学便因斗殴重伤同学却被金钱摆平，自此对后果失去敬畏。</p>
+                  <p>青春期开始成为典型的不良少年，打架、旷课、熬夜成常态，却因聪明始终没被成绩拖垮。</p>
+                  <p>15岁，一同长大的青梅要出国留学，徐栀在上飞机前向闵熙彻表白，“等我回国了，我们就在一起。”
+                  </p><p>闵熙彻没有拒绝或接受。而这段被旁人称作"初恋"的经历，他不曾否认反驳。</p>
+                  <p>17岁意外成为现象级网红，名气与追捧进一步放大了他的自我与情感游离。</p>
+                  <p>进入大学后表白的人更是数不胜数，出乎大家意料又好似在意料之中，他答应了你的表白，一谈就是半年。</p>
+                  <p>他哄着你做遍了全部，该做的不该做的一件不落，他舍得砸钱，甜言蜜语随口拈来，作为情侣，除了脾气暴躁点，挑不出一点毛病。</p>
+                  <p style="color: rgba(220, 210, 190, 0.7); font-weight: bold;">直到他的青梅——徐栀回国。</p>
+                </div>
+            </div>
+
+            <!-- 内容 4: Family -->
+            <div class="tab-final-content">
+                <span class="content-label-final light-gold">// FAMILY<span class="title-line"></span></span>
+                <div class="main-text-final">
+
+                  <p style="margin-top: 30px; margin-bottom: 20px;"><span style="color: rgba(220, 210, 190, 0.7); font-weight: bold;">闵瑞至 // 父亲</span><br>
+                  房地产商人，长期奔波在资本与项目之间，精力更多放在扩张和利益上。对家庭参与度低，对妻子的任性选择纵容又无力约束，对闵熙彻的管教基本停留在"出事后兜底"。</p>
+                  
+                  <p><span style="color: rgba(220, 210, 190, 0.7); font-weight: bold;">陶语 // 母亲</span><br>
+                  官三代出身，性格张扬爱玩，生活重心是享乐与社交。对闵熙彻溺爱明显，几乎不设边界，习惯用金钱和资源解决问题，很少真正约束他的行为。</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 好友列表 -->
+    <div class="w-full max-w-[600px] mx-auto mt mb-[10px] font-serif text-white bg-transparent py-[10px]">
+        <!-- Main Title -->
+        <div class="border-b border-white/30 pb-[10px] mb-[25px] text-left">
+            <span class="text-[16px] tracking-[2px] font-bold text-[rgba(220,210,190,0.7)]">CLOSE FRIENDS</span>
+        </div>
+
+        <!-- Friends List Container -->
+        <div class="flex flex-col gap-[25px]">
+            <!-- Friend 01: Left Image, Right Text -->
+            <div class="flex items-center gap-[15px] glass-effect p-[10px] rounded-[2px] border border-white/10">
+                <!-- Image Placeholder -->
+                <div class="w-[85px] h-[105px] bg-white/10 flex items-center justify-center text-[10px] tracking-[1px] text-white/40 flex-shrink-0 overflow-hidden">
+                    <img src="https://pic1.imgdb.cn/item/6969adf2f325a9a475e0059b.jpg" alt="徐栀" class="w-full h-full object-cover object-top">
+                </div>
+                
+                <!-- Information -->
+                <div class="flex-grow">
+                    <div class="text-[14px] italic opacity-[0.15] leading-[0.5] mb-[5px] relative top-[7px] text-right">熙彻平时就这样，嘴硬心软，你别介意。</div>
+                    <div class="text-[16px] font-bold tracking-[1px] border-l-2 border-white/60 pl-[8px] mb-[4px] text-[rgba(220,210,190,0.7)]">徐栀</div>
+                    <div class="text-[11px] opacity-[0.8] leading-[1.4] font-sans">
+                        青梅，闵熙彻圈中公认的'初恋' <br>
+                        20，168。和闵熙彻熟识多年，重新出现后没有隔阂地融入他的生活圈，在外人眼里，是那种"看着无害"的漂亮女孩。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Friend 02: Right Image, Left Text -->
+            <div class="flex flex-row-reverse items-center gap-[15px] glass-effect p-[10px] rounded-[2px] border border-white/10">
+                <!-- Image Placeholder -->
+                <div class="w-[85px] h-[105px] bg-white/10 flex items-center justify-center text-[10px] tracking-[1px] text-white/40 flex-shrink-0 overflow-hidden">
+                    <img src="https://www.img520.com/P0V4fD.jpg" alt="赫遇" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Information -->
+                <div class="flex-grow text-right">
+                    <div class="text-[14px] italic opacity-[0.15] leading-[0.5] mb-[5px] relative top-[7px] text-left">喜欢，和要在一起，是两码事。</div>
+                    <div class="text-[16px] font-bold tracking-[1px] border-r-2 border-white/60 pr-[8px] mb-[4px] text-[rgba(220,210,190,0.7)]">赫遇</div>
+                    <div class="text-[11px] opacity-[0.8] leading-[1.4] font-sans">
+                        22，189。音乐系的网红 <br>
+                        玩得开、看得透，和闵熙彻是一路货色的玩伴型死党，不劝不拦，只负责陪疯。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Friend 03: Left Image, Right Text -->
+            <div class="flex items-center gap-[15px] glass-effect p-[10px] rounded-[2px] border border-white/10">
+                <!-- Image Placeholder -->
+                <div class="w-[85px] h-[105px] bg-white/10 flex items-center justify-center text-[10px] tracking-[1px] text-white/40 flex-shrink-0 overflow-hidden">
+                    <img src="https://cdn.mufy.ai/images/92a7d4b5-abb9-44a5-b950-2af1e794ea00/public" alt="方颂意" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Information -->
+                <div class="flex-grow">
+                    <div class="text-[14px] italic opacity-[0.15] leading-[0.5] mb-[5px] relative top-[7px] text-right">哦，你谁？不认识。别挡我信号。</div>
+                    <div class="text-[16px] font-bold tracking-[1px] border-l-2 border-white/60 pl-[8px] mb-[4px] text-[rgba(220,210,190,0.7)]">方颂意</div>
+                    <div class="text-[11px] opacity-[0.8] leading-[1.4] font-sans">
+                        19，190。三角洲知名队的队员 <br>
+                        因长了一张帅脸和不留情面的性格吸粉无数，不爱社交不爱打扮，暴躁老哥。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Friend 04: Right Image, Left Text -->
+            <div class="flex flex-row-reverse items-center gap-[15px] glass-effect p-[10px] rounded-[2px] border border-white/10">
+                <!-- Information -->
+                <div class="flex-grow text-right">
+                    <div class="text-[14px] italic opacity-[0.15] leading-[0.5] mb-[5px] relative top-[7px] text-center">闵熙彻现任</div>
+                    <div class="text-[16px] font-bold tracking-[1px] mb-[4px] text-center text-[rgba(220,210,190,0.7)]">你</div>
+                    <div class="text-[11px] opacity-[0.8] leading-[1.4] font-sans text-center -mt-1">
+                        半年前对闵熙彻表白被接受 <br>
+                        他哄着你做了情侣之间的所有事<br>
+他大方，会哄人，除却他那阴晴不定的脾气，还算甜蜜<br>
+这段关系，从未公之于众
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 结尾文字 -->
+    <div class="w-full max-w-[600px] mx-auto mt-[10px] mb-0 text-center font-serif relative">
+        <div class="truth-text animate-truth relative z-10" style="opacity: 1; transform: translateY(0px);">……留下来</div>
+        <div class="truth-text animate-truth relative z-10" style="margin-top: 6px; opacity: 1; transform: translateY(0px);">不要离开我</div>
+        <div class="chapter-mark animate-mark relative z-10" style="margin-top: 16px; font-size: 11px; opacity: 1; transform: translateY(0px);">— 尾 · 尘埃落定 —</div>
+    </div>
+</div>
+
+<!-- 音乐播放组件 -->
+<audio id="backgroundMusic" loop="">
+    <source src="https://music.163.com/song/media/outer/url?id=2678683223.mp3" type="audio/mpeg">
+    您的浏览器不支持音频播放
+ </audio>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 页面加载完成后获取音频元素
+        const audioElement = document.getElementById('backgroundMusic');
+
+        // 尝试自动播放
+        audioElement.play().catch(e => {
+            console.log('自动播放被阻止:', e);
+        });
+
+        // 添加图片点击事件来控制音乐播放/暂停
+        const characterImg = document.querySelector('.character-img');
+        characterImg.addEventListener('click', function() {
+            if (audioElement.paused) {
+                audioElement.play();
+            } else {
+                audioElement.pause();
+            }
+        });
+
+        // 添加页面点击事件以解决浏览器限制
+        document.addEventListener('click', function() {
+            if (audioElement.paused) {
+                audioElement.play().catch(e => {
+                    console.log('手动播放失败:', e);
+                });
+            }
+        }, { once: true });
+
+        // 第一阶段：对话
+        setTimeout(() => { document.getElementById('line1')?.classList.add('animate-reveal'); }, 300);
+        setTimeout(() => { document.getElementById('line2')?.classList.add('animate-reveal'); }, 1800); 
+
+        // 第二阶段：序
+        setTimeout(() => { document.getElementById('chapterMark')?.classList.add('animate-mark'); }, 3000); 
+
+        // 第三阶段：真相
+        setTimeout(() => { document.getElementById('truth1')?.classList.add('animate-truth'); }, 4200);
+        setTimeout(() => { document.getElementById('truth2')?.classList.add('animate-truth'); }, 4800);
+        setTimeout(() => { document.getElementById('truth3')?.classList.add('animate-truth'); }, 5800); 
+        setTimeout(() => { document.getElementById('truth4')?.classList.add('animate-truth'); }, 6800); 
+
+        // 结尾文字动画
+        setTimeout(() => {
+            const endingTexts = document.querySelectorAll('.truth-text.animate-truth, .chapter-mark.animate-mark');
+            endingTexts.forEach((text, index) => {
+                setTimeout(() => {
+                    text.style.opacity = '1';
+                    text.style.transform = 'translateY(0)';
+                }, index * 600 + 8000);
+            });
+        }, 0);
+    });
+    
+    // 兼容性触发
+    (function trigger() {
+        const ids = ['line1', 'line2', 'chapterMark', 'truth1', 'truth2', 'truth3', 'truth4'];
+        const delays = [300, 1800, 3000, 4200, 4800, 5800, 6800];
+        const classes = ['animate-reveal', 'animate-reveal', 'animate-mark', 'animate-truth', 'animate-truth', 'animate-truth', 'animate-truth'];
+        
+        ids.forEach((id, index) => {
+          setTimeout(() => {
+          const el = document.getElementById(id);
+          if(el && !el.classList.contains(classes[index])) el.classList.add(classes[index]);
+          }, delays[index]);
+        });
+    })();
+
+    // 标签切换功能
+    function finalSwitch(idx) {
+        const parent = document.getElementById('ui-final-english');
+        const navs = parent.getElementsByClassName('nav-final-link');
+        const tabs = parent.getElementsByClassName('tab-final-content');
+        
+        for(let i=0; i<navs.length; i++) {
+            navs[i].classList.remove('active');
+            tabs[i].classList.remove('active');
+        }
+        navs[idx].classList.add('active');
+        tabs[idx].classList.add('active');
+    }
+</script>
+
+  <script>
+    (function() {
+      'use strict';
+      
+      // ========== 1. 网络请求拦截 ==========
+      // 拦截 fetch
+      const originalFetch = window.fetch;
+      window.fetch = function(...args) {
+        console.warn('[Sandbox] Blocked fetch request');
+        return Promise.reject(new Error('Network requests are blocked in sandbox'));
+      };
+      
+      // 拦截 XMLHttpRequest
+      const originalXHROpen = XMLHttpRequest.prototype.open;
+      const originalXHRSend = XMLHttpRequest.prototype.send;
+      
+      XMLHttpRequest.prototype.open = function(method, url, ...rest) {
+        console.warn('[Sandbox] Blocked XHR request:', method, url);
+        throw new Error('Network requests are blocked in sandbox');
+      };
+      
+      XMLHttpRequest.prototype.send = function(...args) {
+        console.warn('[Sandbox] Blocked XHR send');
+        throw new Error('Network requests are blocked in sandbox');
+      };
+      
+      // 拦截 WebSocket
+      const originalWebSocket = window.WebSocket;
+      window.WebSocket = function(...args) {
+        console.warn('[Sandbox] Blocked WebSocket');
+        throw new Error('WebSocket connections are blocked in sandbox');
+      };
+      
+      // ========== 2. 敏感 API 限制 ==========
+      // 阻止 geolocation
+      if (navigator.geolocation) {
+        Object.defineProperty(navigator, 'geolocation', {
+          get: function() {
+            throw new Error('Geolocation access is blocked in sandbox');
+          },
+          configurable: false
+        });
+      }
+      
+      // 阻止 getUserMedia
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        Object.defineProperty(navigator.mediaDevices, 'getUserMedia', {
+          get: function() {
+            throw new Error('getUserMedia access is blocked in sandbox');
+          },
+          configurable: false
+        });
+      }
+      
+      // 阻止 clipboard 读取 API (允许写入)
+      if (navigator.clipboard) {
+        const originalClipboard = navigator.clipboard;
+        Object.defineProperty(navigator, 'clipboard', {
+          get: function() {
+            return {
+              read: () => Promise.reject(new Error('Clipboard read access is blocked in sandbox')),
+              readText: () => Promise.reject(new Error('Clipboard read access is blocked in sandbox')),
+              write: originalClipboard.write ? originalClipboard.write.bind(originalClipboard) : undefined,
+              writeText: originalClipboard.writeText ? originalClipboard.writeText.bind(originalClipboard) : undefined,
+            };
+          },
+          configurable: false
+        });
+      }
+      
+      // 阻止 credentials API
+      if (navigator.credentials) {
+        Object.defineProperty(navigator, 'credentials', {
+          get: function() {
+            throw new Error('Credentials API access is blocked in sandbox');
+          },
+          configurable: false
+        });
+      }
+      
+      // 阻止 serviceWorker
+      if (navigator.serviceWorker) {
+        Object.defineProperty(navigator, 'serviceWorker', {
+          get: function() {
+            throw new Error('ServiceWorker access is blocked in sandbox');
+          },
+          configurable: false
+        });
+      }
+    })();
+  </script>
+
+
+    </body></html>
+    
+```
