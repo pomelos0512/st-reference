@@ -1,0 +1,845 @@
+方颂意小剧场
+——————————这里放小剧场
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Substitute</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100px;
+        }
+
+        .memory-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            min-height: 480px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            overflow: hidden;
+            padding: 40px 15px 20px;
+            box-sizing: border-box;
+        }
+
+        /* 巨大的英文水印 */
+        .bg-watermark {
+            font-family: 'Pinyon Script', cursive;
+            position: absolute;
+            top: 8%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 110px; 
+            color: rgba(120, 120, 120, 0.2); 
+            white-space: nowrap;
+            pointer-events: none; 
+            z-index: 0;
+            user-select: none;
+        }
+
+        /* 凌乱的红线层 */
+        .scars-layer {
+            position: absolute;
+            top: -18%;
+            left: 0;
+            width: 100%;
+            height: 138%;
+            pointer-events: none;
+            z-index: 0; /* 与水印同级 */
+            opacity: 0.8;
+        }
+
+        /* 顶部对话区域 */
+        .dialogue-section {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 8px; 
+        }
+
+        /* 上方对话文字 */
+        .dialogue-text {
+            font-size: 17px; 
+            color: rgba(97, 154, 195, 0.8); 
+            font-weight: 400;
+            letter-spacing: 0;
+            opacity: 0; 
+            transform: translateY(20px); 
+            font-family: "Songti SC", "SimSun", serif; 
+            text-shadow: 0 0 4px rgba(97,154,195,0.6), 0 0 8px rgba(97,154,195,0.4); 
+            text-align: center;
+        }
+
+        /* 中间：序章标记 */
+        .chapter-mark {
+            font-size: 12px; 
+            color: rgba(200, 200, 200, 0.7);
+            font-family: "Songti SC", "SimSun", serif;
+            letter-spacing: 4px; 
+            opacity: 0;
+            transform: translateY(10px);
+            margin-top: 16px;
+            margin-bottom: 16px; 
+            position: relative; 
+            z-index: 1;
+            text-shadow: 0 0 4px rgba(97,154,195,0.6), 0 0 8px rgba(97,154,195,0.4); 
+        }
+
+        /* 底部真相区域 */
+        .truth-section {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 6px; 
+        }
+
+        /* 下方真相文字 */
+        .truth-text {
+            font-size: 13px; 
+            font-family: "Songti SC", "SimSun", serif;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(15px);
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* 动画定义 */
+        @keyframes textFloatUp {
+            0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes fadeReveal {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-reveal {
+            animation: textFloatUp 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        
+        .animate-mark {
+            animation: fadeReveal 2s ease-out forwards;
+        }
+        
+        .animate-truth {
+            animation: textFloatUp 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* 英文角色信息面板样式 */
+        #ui-final-english {
+            --bg-glass-ultra: rgba(12, 21, 25, 0.1); 
+            --text-primary: #e0e0e0;
+            --text-dim: rgba(255, 255, 255, 0.45);
+            --accent-gold: #619ac3;
+            
+            font-family: 'Noto Serif SC', serif;
+            width: 100%;
+            max-width: 90vw;
+            height: 320px;
+            margin: 20px auto;
+            padding: 0 5px;
+            box-sizing: border-box;
+            
+            position: relative;
+            font-size: 12px;
+        }
+
+        /* --- 顶部导航区 --- */
+        .nav-final {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px 0;
+            margin-top: -40px;
+            margin-bottom: 5px;
+            z-index: 2;
+        }
+
+        .nav-final-link {
+            cursor: pointer;
+            text-align: center;
+            padding: 8px 15px;
+            color: var(--text-dim);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .nav-final-text {
+            font-size: clamp(9px, 2vw, 11px);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 300;
+            font-family: 'Cinzel', 'Noto Serif SC', serif;
+        }
+
+        .active-dot-final {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 1px;
+            background-color: var(--accent-gold);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        /* 交互状态 */
+        .nav-final-link:hover { color: rgba(255,255,255,0.8); }
+        .nav-final-link.active { color: var(--text-primary); }
+        .nav-final-link.active .nav-final-text {
+            text-shadow: 0 0 10px rgba(255,255,255,0.2);
+            font-weight: 500;
+        }
+        .nav-final-link.active .active-dot-final {
+            opacity: 0;
+        }
+
+        /* --- 内容组件 --- */
+        .content-final-box {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 单个内容页 */
+        .tab-final-content {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            padding: clamp(15px, 4vw, 25px) clamp(10px, 4vw, 20px);
+            box-sizing: border-box;
+            
+            opacity: 0;
+            transform: translateX(8px);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            pointer-events: none;
+            
+            overflow-y: auto;
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        .tab-final-content::-webkit-scrollbar { display: none; }
+        .tab-final-content.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        /* 排版细节 */
+        .content-label-final {
+            font-size: 10px;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            opacity: 0.7;
+            width: 100%;
+            padding-right: 10px;
+            box-sizing: border-box;
+        }
+
+        .main-text-final {
+            font-size: clamp(11px, 2.5vw, 12px);
+            line-height: 1.7;
+            color: rgba(235, 235, 235, 0.8);
+            text-align: justify;
+            user-select: text;
+        }
+
+        .main-text-final p {
+            margin-bottom: 12px;
+        }
+
+        .highlight-final {
+            color: var(--accent-gold);
+            font-weight: 500;
+        }
+
+        /* 角色特质样式 */
+        .character-traits-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .character-trait {
+            display: inline-block;
+        }
+
+        .trait-text {
+            font-size: clamp(10px, 2vw, 11px);
+            color: #619ac3;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        
+        /* 微微发光效果 */
+        .glow-text {
+            text-shadow: 0 0 5px rgba(255,255,255,0.5), 0 0 10px rgba(255,255,255,0.3);
+            white-space: nowrap;
+        }
+
+        /* 淡金色样式 */
+        .light-gold {
+            color: rgba(99, 136, 208, 0.7) !important;
+        }
+
+        /* 标题横线样式 */
+        .title-line {
+            display: inline-block;
+            height: 1px;
+            background: rgba(97, 154, 195, 0.7);
+            margin-left: 15px;
+            flex-grow: 1;
+            vertical-align: middle;
+        }
+
+        /* 角色信息样式 */
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .info-label {
+            font-weight: 500;
+            color: #619ac3;
+            min-width: 80px;
+            margin-right: 15px;
+            font-size: 11px;
+        }
+
+        .info-value {
+            color: rgba(235, 235, 235, 0.85);
+            flex-grow: 1;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* 玻璃效果工具类 */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="memory-container">
+
+
+    <div style="
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0px auto;
+    padding: 20px 20px 40px; 
+    text-align: center;
+    background: transparent;
+    font-family: 'Times New Roman', serif;
+    overflow: hidden;
+">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+        /* 动画：谎言浮现 */
+        @keyframes memorySurfaceUp {
+          0% { opacity: 0; transform: translate(-50%, -20%) scale(0.95); filter: blur(2px); }
+          100% { opacity: 0.15; transform: translate(-50%, -50%) scale(1); filter: blur(0); }
+        }
+
+        /* 动画：结局定格 */
+        @keyframes lieReveal {
+          0% { opacity: 0; transform: translateY(5px); }
+          100% { opacity: 0.8; transform: translateY(0); }
+        }
+
+        /* 动画：心碎独白淡入 */
+        @keyframes monologueFade {
+          0% { opacity: 0; transform: translateY(10px); }
+          100% { opacity: 0.9; transform: translateY(0); }
+        }
+
+        /* 背景底图样式 */
+        .background-whisper {
+          position: absolute;
+          top: 42%; 
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 140%;
+          font-family: 'Great Vibes', cursive;
+          font-size: 3.2em;
+          color: #619ac3;
+          white-space: nowrap;
+          z-index: 0;
+          pointer-events: none;
+          opacity: 0; 
+          animation: memorySurfaceUp 3.5s ease-out forwards;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        /* 英文底图样式已在HTML中直接实现横线 */
+
+        /* 底部 lie 样式 */
+        .footer-lie {
+          font-size: 11px; 
+          color: rgba(200, 200, 200, 0.7);
+          font-family: "Songti SC", "SimSun", serif;
+          letter-spacing: 4px; 
+          margin-top: 8px; /* 增加上方间距 */
+          margin-bottom: 8px; /* 增加下方间距 */
+          text-shadow: 0 0 4px rgba(97,154,195,0.6), 0 0 8px rgba(97,154,195,0.4); 
+        }
+
+        /* 新增：心碎独白容器 */
+        .monologue-container {
+            font-size: 13px;
+            color: rgba(97, 154, 195, 0.8);
+            font-family: "Songti SC", "SimSun", serif;
+            letter-spacing: 1px;
+            text-align: center;
+            line-height: 1.6;
+            text-shadow: 0 0 4px rgba(97,154,195,0.6), 0 0 8px rgba(97,154,195,0.4);
+        }
+        
+        /* 逐句浮现效果 */
+        .monologue-line {
+            display: block;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: monologueFade 1.5s ease-out forwards;
+        }
+        
+        /* 为每句话设置不同的延迟 */
+        .monologue-line:nth-child(1) { animation-delay: 2s; }   /* 第一句在英文底图显示2秒后 */
+        .monologue-line:nth-child(2) { animation-delay: 3s; }   /* 第二句延迟3秒 */
+        .monologue-line:nth-child(3) { animation-delay: 4s; }   /* 第三句延迟4秒 */
+        .monologue-line:nth-child(4) { animation-delay: 5s; }   /* 第四句延迟5秒 */
+        
+        /* 纯色文字效果 */
+        .gradient-text {
+            color: #619ac3;
+            filter: drop-shadow(0 2px 4px rgba(97, 154, 195, 0.15));
+        }
+        
+        /* 调整后的渐变透明文字效果，前面颜色更加明显 */
+        .gradient-transparent {
+            color: #619ac3;
+            filter: drop-shadow(0 2px 4px rgba(97, 154, 195, 0.15));
+            -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%);
+        }
+        
+        .monologue-line {
+          display: block;
+        }
+    </style>
+
+    <!-- 背景层 -->
+    <div class="background-whisper">
+        You've been lying to me
+        <!-- 英文底图中间的横线 -->
+        <div style="
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(97, 154, 195, 0.8), transparent);
+            opacity: 1;
+            z-index: 1;
+            transform: translateY(50%);
+        "></div>
+    </div>
+
+    <!-- 主标题 -->
+    <div style="
+        position: relative;
+        z-index: 2;
+        font-size: 2.2em;
+        font-weight: 900;
+        letter-spacing: 5px;
+        line-height: 1.4;
+        color: #619ac3;
+        filter: drop-shadow(0 2px 4px rgba(97, 154, 195, 0.15));
+        text-align: center;
+        /* 调整后的渐变透明效果，前面颜色更加明显 */
+        -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%);
+        mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%);
+    ">
+        弃犬效应
+    </div>
+    
+    <!-- 新增副标题 -->
+    <div style="
+        position: relative;
+        z-index: 2;
+        font-size: 0.9em;
+        font-weight: bold;
+        letter-spacing: 2px;
+        line-height: 1.4;
+        color: #619ac3;
+        text-align: center;
+        margin-top: 10px;
+        opacity: 1;
+        filter: drop-shadow(0 2px 4px rgba(97, 154, 195, 0.15));
+        -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%);
+        mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%);
+        text-shadow: 0 0 4px rgba(97,154,195,0.6), 0 0 8px rgba(97,154,195,0.4);
+    ">
+        网恋被钓还以为真心的天才电竞手<br>x<br>提出分手消失的前任
+    </div>
+
+    <!-- 底部结局 -->
+    <div class="footer-lie">— 𝓛𝒾𝑒 —</div>
+
+    <!-- 心碎独白 -->
+    <div class="monologue-container" style="margin-top: 12px; margin-bottom: -40px;">
+        <span class="monologue-line">你说的话有一句是真的吗</span>
+        <span class="monologue-line">为什么总是要骗我</span>
+        <span class="monologue-line" style="margin-top: 8px;">释怀不了</span>
+        <span class="monologue-line">可我确确实实还爱你</span>
+    </div>
+
+</div>
+    <!-- 破碎记忆回廊 - 幽灵刻印版（60%透明度 + 终句残留） -->
+    <div class="character-img" style="
+        position: relative;
+        width: 100%;
+        max-width: 450px;
+        height: 200px; 
+        margin: 20px auto;
+
+        background-image: url('https://cdn.mufy.ai/images/92a7d4b5-abb9-44a5-b950-2af1e794ea00/public');
+        background-size: cover;
+        background-position: center 31%;
+        border-radius: 6px;
+        overflow: hidden;
+        font-family: 'SimSun', 'Songti SC', serif;
+        cursor: pointer;
+    ">
+    </div>
+
+    <!-- 英文角色信息面板 -->
+    <div id="ui-final-english">
+        <!-- 结构层 -->
+        <div class="nav-final">
+            <!-- 标签 1: 关于他 -->
+            <div class="nav-final-link active" onclick="finalSwitch(0)">
+                <span class="nav-final-text">HIM</span>
+                <div class="active-dot-final"></div>
+            </div>
+            <!-- 标签 2: 侧写 -->
+            <div class="nav-final-link" onclick="finalSwitch(1)">
+                <span class="nav-final-text">PROFILE</span>
+                <div class="active-dot-final"></div>
+            </div>
+            <!-- 标签 3: 过去 -->
+            <div class="nav-final-link" onclick="finalSwitch(2)">
+                <span class="nav-final-text">PAST</span>
+                <div class="active-dot-final"></div>
+            </div>
+            <!-- 标签 4: Bonds -->
+            <div class="nav-final-link" onclick="finalSwitch(3)">
+                <span class="nav-final-text">FAMILY</span>
+                <div class="active-dot-final"></div>
+            </div>
+        </div>
+
+        <div class="content-final-box glass-effect">
+            
+            <!-- 内容 1: About -->
+            <div class="tab-final-content active">
+                <span class="content-label-final light-gold">// HIM<span class="title-line"></span></span>
+                <div class="main-text-final">
+                  <div class="character-traits-container">
+                    <div class="character-trait">
+                      <span class="trait-text glow-text"># 三角洲冠军队</span>
+                    </div>
+                    <div class="character-trait">
+                      <span class="trait-text glow-text"># 六边形选手</span>
+                    </div>
+                    <div class="character-trait">
+                      <span class="trait-text glow-text"># 嘴臭王者</span>
+                    </div>
+                  </div>
+                  
+                  <div class="character-info">
+                    <div class="info-row">
+                      <span class="info-label">Name</span>
+                      <span class="info-value">方颂意</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="info-label">Age</span>
+                      <span class="info-value">19岁</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="info-label">Birthday</span>
+                      <span class="info-value">2.16</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="info-label">Gender</span>
+                      <span class="info-value">男</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="info-label">Height</span>
+                      <span class="info-value">190CM</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="info-label">Identity</span>
+                      <span class="info-value">ECH队员，直播主玩三角洲、王者</span>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <!-- 内容 2: Profile -->
+            <div class="tab-final-content">
+                <span class="content-label-final light-gold">// PROFILE<span class="title-line"></span></span>
+                <div class="main-text-final">
+                  <p>撕漫男长相，像从韩漫里走出来的高瘦少年，干净的黑瞳多数时候半阖着，颓丧又带点傲气。身形清瘦高挑，线条紧实不显弱，黑发微乱、眼神冷静而深。</p>
+                  <p style="border-left: 1px solid rgba(97, 154, 195, 0.5); padding-left: 15px; margin: 15px 0;">
+                    <span style="font-style: italic; font-weight: bold;">嘴硬拽、情绪暴躁却懒得解释，习惯用嘲讽和冷处理隔开世界，只把耐心留给游戏和少数在意的事；直来直去、不懂暧昧。私底下是个高度自持的实用主义者：重视边界与安全感，用实力和行动证明价值。</span>
+                  </p>
+                  <p style="margin-top: 20px;">账号ID都是'FS_1'，没什么原因，纯懒。平日习惯把住处弄乱，认为那才有家的感觉。<p>
+                  <p>作息混乱至极，可以为了游戏废寝忘食，而出门必带耳机，热衷于各种芥末味零食，尤其芥末薯片。</p>
+                  <p>厌恶八卦的邻里和虚伪的怜悯，看见别人秀恩爱不屑一顾，手感差的电子设备会让他忍不住发脾气。</p>
+                </div>
+            </div>
+
+            <!-- 内容 3: Past -->
+            <div class="tab-final-content">
+                <span class="content-label-final light-gold">// PAST<span class="title-line"></span></span>
+                <div class="main-text-final">
+                  <p style="color: rgba(97, 154, 195, 0.7);">出生在几乎无人知晓的小县城青村，童年在逼仄嘈杂的筒子楼里度过。母亲早早离开，父亲酗酒、失控又无力，暴力与羞辱贯穿了他的成长。</p>
+                  <p>贫穷与被放弃的处境让他在校园里失去保护，只能靠打架自保。网络与黑网吧成了唯一的逃生通道，游戏天赋在压抑中被激活，他靠低价代打一点点攒钱，只为离开那座小城。</p>
+                  <p style="color: rgba(97, 154, 195, 0.7);">辍学、北上、进入青训，是他孤注一掷的选择；忍过霸凌，也真的动过手。</p>
+                  <p style="font-style: italic; font-weight: bold; border-left: 1px solid rgba(97, 154, 195, 0.5); padding-left: 15px; margin: 15px 0;">十四岁那年在网上因接单认识了你，听到你的声音后萌生了好感，一来二去就谈上了，只是那时候还小，他对年龄身份撒谎，和你谈起了网恋。</p>
+                  <p style="color: rgba(97, 154, 195, 0.7);">一方面是担心你嫌弃自己，另一方面是对自己长相没有信心，发的照片都是从网上随便找的。期间他带你上分，替你账号打榜，一到了赛季结束，你总会无端说分手、拉黑，来来回回好几次。</p>
+                  <p>他单纯以为你爱作，哪怕心里有些嘀咕，还是很快被你哄好，断断续续谈到了十六岁。在闵熙彻推荐下开始直播，嘴臭但技术顶尖，加上一张过分好看的脸迅速爆红。</p>
+                  <p style="color: rgba(97, 154, 195, 0.7); white-space: normal; font-style: italic; font-weight: bold; border-left: 1px solid rgba(97, 154, 195, 0.5); padding-left: 15px; margin: 15px 0;">十八岁生日当天，也是压力最大的时候，他提出想和你见面，结果你说分手，全平台把他拉黑。</p>
+                  <p style="font-weight: bold;">他只能靠拼命训练去缓解那份情绪，第一年参加比赛就取得不菲的成绩，第二年成功作为黑马和队友一同夺冠，走向了他从不曾想过的未来。</p>
+                </div>
+            </div>
+
+            <!-- 内容 4: Family -->
+            <div class="tab-final-content">
+                <span class="content-label-final light-gold">// FAMILY<span class="title-line"></span></span>
+                <div class="main-text-final">
+
+                  <p style="margin-top: 30px; margin-bottom: 20px;"><span style="color: rgba(99, 136, 208, 0.7); font-weight: bold;">方胜民 // 父亲</span><br>
+                  是个被生活彻底耗空的中年工人。长期酗酒让他身形发虚、眼神浑浊，穿着永远邋遢陈旧，身上带着挥之不去的酒味与衰败气息。性格懦弱又自卑，靠自大维持尊严，习惯用酒精和暴力逃避现实。</p>
+                  
+                  <p style="margin-top: 30px; margin-bottom: 20px;"><span style="color: rgba(99, 136, 208, 0.7); font-weight: bold;">马兴 // ECH教练</span><br>
+                  对方颂意格外看好，私下也对他照顾有加。沉稳克制，眼神锐利。做事严谨、要求极高，对外冷硬不留情，对内却极度护短，能一眼看穿选手的状态与问题，是那种让人既怕又信、关键时刻能扛事的人。</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- 好友列表 -->
+    <div class="w-full max-w-[600px] mx-auto mt mb-[10px] font-serif text-white bg-transparent py-[10px]">
+        <!-- Main Title -->
+        <div class="border-b border-white/30 pb-[10px] mb-[25px] text-left">
+            <span class="text-[16px] tracking-[2px] font-bold text-[#619ac3]">CLOSE FRIENDS</span>
+        </div>
+
+        <!-- Friends List Container -->
+        <div class="flex flex-col gap-[25px]">
+            <!-- Friend 01: Left Image, Right Text -->
+            <div class="flex items-center gap-[15px] glass-effect p-[10px] rounded-[2px] border border-white/10">
+                <!-- Image Placeholder -->
+                <div class="w-[85px] h-[105px] bg-white/10 flex items-center justify-center text-[10px] tracking-[1px] text-white/40 flex-shrink-0 overflow-hidden">
+                    <img src="https://cdn.mufy.ai/images/3d2a8d3a-35b7-4a35-9ac4-ac1536f71a00/public" alt="闵熙彻" class="w-full h-full object-cover object-top">
+                </div>
+                
+                <!-- Information -->
+                <div class="flex-grow">
+                    <div class="text-[14px] italic opacity-[0.15] leading-[0.5] mb-[5px] relative top-[7px] text-right">行了行了，知道了，烦不烦。。</div>
+                    <div class="text-[16px] font-bold tracking-[1px] border-l-2 border-white/60 pl-[8px] mb-[4px] text-[#619ac3]">闵熙彻</div>
+                    <div class="text-[11px] opacity-[0.8] leading-[1.4] font-sans">
+                        损友 <br>
+                        20，192。是方颂意进了青训之后认识的朋友，直播也是闵熙彻的推荐。两人私下经常一起打游戏，好的时候很好，吵起来也很凶。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Friend 02: Right Image, Left Text -->
+            <div class="flex flex-row-reverse items-center gap-[15px] glass-effect p-[10px] rounded-[2px] border border-white/10">
+                <!-- Image Placeholder -->
+                <div class="w-[85px] h-[105px] bg-white/10 flex items-center justify-center text-[10px] tracking-[1px] text-white/40 flex-shrink-0 overflow-hidden">
+                    <img src="https://free.picui.cn/free/2026/01/28/6979a7983a8fe.jpg" alt="季悦" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Information -->
+                <div class="flex-grow text-right">
+                    <div class="text-[14px] italic opacity-[0.15] leading-[0.5] mb-[5px] relative top-[7px] text-left">我只是路过，但我有点想评价。</div>
+                    <div class="text-[16px] font-bold tracking-[1px] border-r-2 border-white/60 pr-[8px] mb-[4px] text-[#619ac3]">季悦</div>
+                    <div class="text-[11px] opacity-[0.8] leading-[1.4] font-sans">
+                        ECH队员 <br>
+                        19，185。长了张可爱的娃娃脸，和方颂意是战队公认的"臭味相投"组合，日常互怼、一起开黑、分享八卦。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Friend 03: Left Image, Right Text -->
+            <div class="flex items-center gap-[15px] glass-effect p-[10px] rounded-[2px] border border-white/10">
+                <!-- Image Placeholder -->
+                <div class="w-[85px] h-[105px] bg-white/10 flex items-center justify-center text-[10px] tracking-[1px] text-white/40 flex-shrink-0 overflow-hidden">
+                    <img src="https://free.picui.cn/free/2026/01/28/6979a7edbb8a3.jpg" alt="韩新橙" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Information -->
+                <div class="flex-grow">
+                    <div class="text-[14px] italic opacity-[0.15] leading-[0.5] mb-[5px] relative top-[7px] text-right">你真是sorry全场。</div>
+                    <div class="text-[16px] font-bold tracking-[1px] border-l-2 border-white/60 pl-[8px] mb-[4px] text-[#619ac3]">韩新橙</div>
+                    <div class="text-[11px] opacity-[0.8] leading-[1.4] font-sans">
+                        ECH队员 <br>
+                        18，189。标准的帅哥，剑眉星目，染了一头铂金发。家里有钱技术又不错，一直暗暗的和方颂意争高下，和方颂意不对付。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 结尾文字 -->
+    <div class="w-full max-w-[600px] mx-auto mt-[10px] mb-0 text-center font-serif relative">
+        <div class="truth-text animate-truth relative z-10" style="
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #619ac3;
+            filter: drop-shadow(0 2px 4px rgba(97, 154, 195, 0.15));
+            -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%);
+            text-shadow: 0 0 4px rgba(97,154,195,0.6), 0 0 8px rgba(97,154,195,0.4);
+        ">想要对你坦露真心</div>
+        <div class="truth-text animate-truth relative z-10" style="
+            margin-top: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #619ac3;
+            filter: drop-shadow(0 2px 4px rgba(97, 154, 195, 0.15));
+            -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%);
+            text-shadow: 0 0 4px rgba(97,154,195,0.6), 0 0 8px rgba(97,154,195,0.4);
+        ">又怕你再次弃我而去</div>
+        <div class="truth-text animate-truth relative z-10" style="
+            margin-top: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #619ac3;
+            filter: drop-shadow(0 2px 4px rgba(97, 154, 195, 0.15));
+            -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%);
+            text-shadow: 0 0 4px rgba(97,154,195,0.6), 0 0 8px rgba(97,154,195,0.4);
+        ">……{{user}}，我好痛</div>
+        <div class="chapter-mark animate-mark relative z-10" style="margin-top: 16px; font-size: 11px;">— 易破防的网恋前任 —</div>
+    </div>
+</div>
+
+<!-- 音乐播放组件 -->
+<audio id="backgroundMusic" loop>
+    <source src="https://music.163.com/song/media/outer/url?id=1958429133.mp3" type="audio/mpeg">
+    您的浏览器不支持音频播放
+ </audio>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 页面加载完成后获取音频元素
+        const audioElement = document.getElementById('backgroundMusic');
+
+        // 尝试自动播放
+        audioElement.play().catch(e => {
+            console.log('自动播放被阻止:', e);
+        });
+
+        // 添加图片点击事件来控制音乐播放/暂停
+        const characterImg = document.querySelector('.character-img');
+        characterImg.addEventListener('click', function() {
+            if (audioElement.paused) {
+                audioElement.play();
+            } else {
+                audioElement.pause();
+            }
+        });
+
+        // 添加页面点击事件以解决浏览器限制
+        document.addEventListener('click', function() {
+            if (audioElement.paused) {
+                audioElement.play().catch(e => {
+                    console.log('手动播放失败:', e);
+                });
+            }
+        }, { once: true });
+
+        // 页面元素已通过CSS动画自动显示，无需额外JavaScript控制
+
+ 
+
+        // 结尾文字已直接显示，无需动画
+    });
+    
+        // 文本已直接显示，无需兼容性触发动画
+
+    // 标签切换功能
+    function finalSwitch(idx) {
+        const parent = document.getElementById('ui-final-english');
+        const navs = parent.getElementsByClassName('nav-final-link');
+        const tabs = parent.getElementsByClassName('tab-final-content');
+        
+        for(let i=0; i<navs.length; i++) {
+            navs[i].classList.remove('active');
+            tabs[i].classList.remove('active');
+        }
+        navs[idx].classList.add('active');
+        tabs[idx].classList.add('active');
+    }
+</script>
+</body>
+</html>
+```
